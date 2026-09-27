@@ -606,7 +606,7 @@ one of these halves which are called surrogates.
 
 To check for that, the only way to tell whether you've encountered
 a surrogate (that I can imagine at least) is by (ab)using that Char.toCode
-accesses it's first _2_ indexes if the code at the first index indicates there must be a second half,
+accesses its first _2_ indexes if the code at the first index indicates there must be a second half,
 leading to NaN being returned.
 
 -}
