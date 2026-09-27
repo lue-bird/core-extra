@@ -364,12 +364,10 @@ stringExtra =
             (\f -> exampleStringList |> List.foldl (\exampleString _ -> f exampleString) False)
             [ ( "String.uncons", String.Extra.IsCapitalized.uncons )
             , ( "String.toList", String.Extra.IsCapitalized.toList )
-            , ( "String.left 2 >> String.toList", String.Extra.IsCapitalized.leftToList )
-            , ( "String.slice 0 2 >> String.toList", String.Extra.IsCapitalized.sliceToList )
-            , ( "String.slice 0 char-width >> String.any", String.Extra.IsCapitalized.sliceAny )
-            , ( "String.left char-width >> String.any", String.Extra.IsCapitalized.leftAny )
-            , ( "String.left char-width (reused) >> String.any", String.Extra.IsCapitalized.leftAnyReuseSlice )
-            , ( "String.left char-width (try 1 first, reused) >> String.any", String.Extra.IsCapitalized.leftAnyShortcutReuseSlice )
+            , ( "String.left 1 >> String.toList", String.Extra.IsCapitalized.leftToList )
+            , ( "String.slice 0 1 >> String.toList", String.Extra.IsCapitalized.sliceToList )
+            , ( "String.slice 0 1 >> String.any", String.Extra.IsCapitalized.sliceAny )
+            , ( "String.left 1 >> String.any", String.Extra.IsCapitalized.leftAny )
             ]
         ]
 
