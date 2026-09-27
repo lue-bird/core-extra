@@ -376,7 +376,7 @@ stringExtra =
 
 exampleStringList : List String
 exampleStringList =
-    [ "Dict", "size", "List", "length", "identity", "", "", "VeryLongModuleNameYouWouldNotBelieveHowLongItIs", "NonEmpty", "map", "foldl", "foldr", "", "Internal", "CompanyName", "view", "update", "subscriptions", "Hello, world. Ah! what a nice evening sun the world is showing us today on the horizon.", "waterlilies", "bank teller flees the town of Wallsocket after being exposed for embezzling money from his clientele for over a decade." ]
+    [ "Dict", "size", "List", "length", "identity", "", "", "VeryLongModuleNameYouWouldNotBelieveHowLongItIs", "NonEmpty", "map", "foldl", "foldr", "", "Internal", "CompanyName", "view", "update", "subscriptions", "Hello, world. Ah! what a nice evening sun the world is showing us today on the horizon.", "waterlilies", "bank teller flees the town of Wallsocket after being exposed for embezzling money from his clientele for over a decade.", "Čau!", "", "物語シリーズ", "Ελληνική Δημοκρατία", "Давайте рассмотрим Россию" ]
 
 
 rightLeft : Int -> List Benchmark
