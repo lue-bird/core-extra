@@ -4,7 +4,7 @@ module String.Extra exposing
     , replaceSlice, insertAt, nonEmpty, nonBlank, removeDiacritics
     , break, softBreak
     , wrap, wrapWith, softWrap, softWrapWith, quote, surround
-    , isBlank, countOccurrences
+    , isBlank, countOccurrences, isCapitalized
     , clean, unquote, unsurround, unindent, ellipsis, softEllipsis, ellipsisWith, stripTags, pluralize
     , toSentence, toSentenceOxford
     , rightOf, leftOf, rightOfBack, leftOfBack
@@ -43,7 +43,7 @@ Functions borrowed from the Rails Inflector class
 
 ## Checks
 
-@docs isBlank, countOccurrences
+@docs isBlank, countOccurrences, isCapitalized
 
 
 ## Formatting
@@ -570,6 +570,49 @@ countOccurrences needle haystack =
         haystack
             |> String.indexes needle
             |> List.length
+
+
+{-| Whether the string starts with an uppercase char.
+
+    isCapitalized "Hello, World." --> True
+
+    isCapitalized "sign language" --> False
+
+    isCapitalized "" -> False
+
+    isCapitalized "NO WAY!" --> True
+
+    isCapitalized "2012" --> False
+
+-}
+isCapitalized : String -> Bool
+isCapitalized string =
+    let
+        firstCodeUnit : String
+        firstCodeUnit =
+            String.left 1 string
+    in
+    String.any Char.isUpper firstCodeUnit
+        || (String.any charIsUtf8Surrogate firstCodeUnit
+                && String.any Char.isUpper (String.left 2 string)
+           )
+
+
+{-| Some code points like 🔧 are represented as 2 consecutive UTF-16 code units
+within js strings.
+
+So when we use `String.slice`, the resulting String might only contain
+one of these halves which are called surrogates.
+
+To check for that, the only way to tell whether you've encountered
+a surrogate (that I can imagine at least) is by (ab)using that Char.toCode
+accesses it's first _2_ indexes if the code at the first index indicates there must be a second half,
+leading to NaN being returned.
+
+-}
+charIsUtf8Surrogate : Char -> Bool
+charIsUtf8Surrogate char =
+    Basics.isNaN (Basics.toFloat (Char.toCode char))
 
 
 {-| Truncate the second string at the specified length if the string is

@@ -32,6 +32,7 @@ import Set exposing (Set)
 import Set.Extra.AreDisjoint
 import Set.Extra.SymmetricDifference
 import String.Extra.IsBlank
+import String.Extra.IsCapitalized
 import String.Extra.RightOfLeftOf
 
 
@@ -359,7 +360,23 @@ stringExtra =
             , Bench.describe "100 matches" (rightLeft 100)
             , Bench.describe "1000 matches" (rightLeft 1000)
             ]
+        , Bench.rank "String.ExtraExtra.isCapitalized"
+            (\f -> exampleStringList |> List.foldl (\exampleString _ -> f exampleString) False)
+            [ ( "String.uncons", String.Extra.IsCapitalized.uncons )
+            , ( "String.toList", String.Extra.IsCapitalized.toList )
+            , ( "String.left 2 >> String.toList", String.Extra.IsCapitalized.leftToList )
+            , ( "String.slice 0 2 >> String.toList", String.Extra.IsCapitalized.sliceToList )
+            , ( "String.slice 0 char-width >> String.any", String.Extra.IsCapitalized.sliceAny )
+            , ( "String.left char-width >> String.any", String.Extra.IsCapitalized.leftAny )
+            , ( "String.left char-width (reused) >> String.any", String.Extra.IsCapitalized.leftAnyReuseSlice )
+            , ( "String.left char-width (try 1 first, reused) >> String.any", String.Extra.IsCapitalized.leftAnyShortcutReuseSlice )
+            ]
         ]
+
+
+exampleStringList : List String
+exampleStringList =
+    [ "Dict", "size", "List", "length", "identity", "", "", "VeryLongModuleNameYouWouldNotBelieveHowLongItIs", "NonEmpty", "map", "foldl", "foldr", "", "Internal", "CompanyName", "view", "update", "subscriptions", "Hello, world. Ah! what a nice evening sun the world is showing us today on the horizon.", "waterlilies", "bank teller flees the town of Wallsocket after being exposed for embezzling money from his clientele for over a decade." ]
 
 
 rightLeft : Int -> List Benchmark
