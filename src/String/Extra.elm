@@ -572,11 +572,13 @@ countOccurrences needle haystack =
             |> List.length
 
 
-{-| Whether the string starts with an uppercase char.
+{-| Whether the string starts with an uppercase ASCII char.
 
     isCapitalized "Hello, World." --> True
 
     isCapitalized "sign language" --> False
+
+    isCapitalized "Σ" --> False
 
     isCapitalized "" -> False
 
@@ -587,32 +589,9 @@ countOccurrences needle haystack =
 -}
 isCapitalized : String -> Bool
 isCapitalized string =
-    let
-        firstCodeUnit : String
-        firstCodeUnit =
-            String.left 1 string
-    in
-    String.any Char.isUpper firstCodeUnit
-        || (String.any charIsUtf8Surrogate firstCodeUnit
-                && String.any Char.isUpper (String.left 2 string)
-           )
-
-
-{-| Some code points like 🔧 are represented as 2 consecutive UTF-16 code units
-within js strings.
-
-So when we use `String.slice`, the resulting String might only contain
-one of these halves which are called surrogates.
-
-To check for that, the only way to tell whether you've encountered
-a surrogate (that I can imagine at least) is by (ab)using that Char.toCode
-accesses its first _2_ indexes if the code at the first index indicates there must be a second half,
-leading to NaN being returned.
-
--}
-charIsUtf8Surrogate : Char -> Bool
-charIsUtf8Surrogate char =
-    Basics.isNaN (Basics.toFloat (Char.toCode char))
+    -- String.left may slice a surrogate pair in half.
+    -- That is fine though as Char.isUpper reliably rejects on these code units
+    String.any Char.isUpper (String.left 1 string)
 
 
 {-| Truncate the second string at the specified length if the string is
