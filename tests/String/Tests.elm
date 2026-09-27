@@ -1,4 +1,4 @@
-module String.Tests exposing (breakTest, cleanTest, countOccurrencesTest, dasherizeTest, decapitalizeTest, ellipsisTest, insertAtTest, isBlankTest, leftOfBackTest, leftOfTest, nonBlankTest, pluralizeTest, rightOfBackTest, rightOfTest, softBreakTest, stripTagsTest, surroundTest, toSentenceCaseTest, toTitleCaseTest, underscoredTest, unquoteTest, wrapTest, isCapitalizedTest)
+module String.Tests exposing (breakTest, cleanTest, countOccurrencesTest, dasherizeTest, decapitalizeTest, ellipsisTest, insertAtTest, isBlankTest, isCapitalizedTest, leftOfBackTest, leftOfTest, nonBlankTest, pluralizeTest, rightOfBackTest, rightOfTest, softBreakTest, stripTagsTest, surroundTest, toSentenceCaseTest, toTitleCaseTest, underscoredTest, unquoteTest, wrapTest)
 
 import Char.Extra
 import Expect
