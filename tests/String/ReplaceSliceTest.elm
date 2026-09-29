@@ -20,7 +20,7 @@ replaceSliceTest =
                         String.Extra.replaceSlice sub start end string
                             |> String.contains sub
                             |> Expect.equal True
-                            |> Expect.onFail "The slice was not subtituted"
+                            |> Expect.onFail "The slice was not substituted"
         , fuzz replaceSliceProducer "Result string has the length of the substitution + string after removing the slice" <|
             \{ string, start, end, sub } ->
                 case string of

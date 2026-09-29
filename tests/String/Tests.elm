@@ -47,7 +47,7 @@ toSentenceCaseTest =
 decapitalizeTest : Test
 decapitalizeTest =
     describe "decapitalize"
-        [ fuzz Fuzz.string "It only converst the first char in the string to lowercase" <|
+        [ fuzz Fuzz.string "It only converts the first char in the string to lowercase" <|
             \string ->
                 let
                     result =

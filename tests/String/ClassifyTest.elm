@@ -26,7 +26,7 @@ classifyTest =
                     |> uncons
                     |> Maybe.map first
                     |> Expect.equal (string |> String.trim |> String.toUpper |> uncons |> Maybe.map first)
-        , fuzz validWords "It is camelized once replaced non word charactes with a compatible string" <|
+        , fuzz validWords "It is camelized once replaced non word characters with a compatible string" <|
             \string ->
                 string
                     |> classify

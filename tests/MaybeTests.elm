@@ -179,7 +179,7 @@ suite =
                 \() ->
                     Maybe.Extra.unpack (\() -> 0) String.length Nothing
                         |> Expect.equal 0
-            , test "returns the unpackped value if it is a Just" <|
+            , test "returns the unpacked value if it is a Just" <|
                 \() ->
                     Maybe.Extra.unpack (\() -> 0) String.length (Just "abc")
                         |> Expect.equal 3
